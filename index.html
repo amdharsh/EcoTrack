@@ -3,115 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoTrack | Sustainable Carbon Tracking</title>
+    <title>EcoTrack | Comprehensive Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .score-gradient {
-            background: conic-gradient(#22c55e var(--score), #e5e7eb 0deg);
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .modal { display: none; }
+        .modal.active { display: flex; }
+        @media print { .no-print { display: none !important; } .tab-content { display: block !important; } }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen pb-20">
-
-    <header class="bg-white border-b sticky top-0 z-10">
-        <div class="max-w-md mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="bg-green-600 p-1.5 rounded-lg text-white">
-                    <i data-lucide="leaf" class="w-5 h-5"></i>
-                </div>
-                <h1 class="text-xl font-bold tracking-tight">EcoTrack</h1>
+<body class="bg-[#f8fafc] min-h-screen">
+    <header class="bg-white border-b sticky top-0 z-50 no-print">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-green-600">
+                <i data-lucide="leaf" class="w-6 h-6"></i>
+                <span class="font-bold text-xl text-slate-900">EcoTrack</span>
             </div>
-            <button class="text-slate-500"><i data-lucide="bell" class="w-6 h-6"></i></button>
+            <nav class="flex bg-slate-100 p-1 rounded-xl">
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn px-4 py-1.5 text-sm font-medium rounded-lg bg-white shadow text-slate-900">Dashboard</button>
+                <button onclick="switchTab('transactions')" id="btn-transactions" class="tab-btn px-4 py-1.5 text-sm font-medium text-slate-500">Transactions</button>
+                <button onclick="switchTab('insights')" id="btn-insights" class="tab-btn px-4 py-1.5 text-sm font-medium text-slate-500">Insights</button>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-md mx-auto px-4 pt-6 space-y-6">
-        
-        <section id="dashboard" class="space-y-6">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Sustainability Score</h3>
-                <div class="relative w-40 h-40 flex items-center justify-center rounded-full border-8 border-slate-100 mb-4" style="--score: 252deg;">
-                    <div class="text-center">
-                        <span class="text-5xl font-bold text-green-600">70</span>
-                        <p class="text-xs text-slate-400 font-medium">Out of 100</p>
-                    </div>
+    <main class="max-w-5xl mx-auto px-6 py-8">
+        <div id="dashboard" class="tab-content active space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Total Emissions</p>
+                    <p class="text-3xl font-bold">204.26 kg</p>
                 </div>
-                <div class="grid grid-cols-2 gap-4 w-full pt-4 border-t border-slate-50">
-                    <div>
-                        <p class="text-xs text-slate-500">Total Emissions</p>
-                        <p class="text-lg font-bold">142.5 <span class="text-xs font-normal text-slate-400">kgCO₂e</span></p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-slate-500">Carbon Intensity</p>
-                        <p class="text-lg font-bold">0.82 <span class="text-xs font-normal text-slate-400">kg/USD</span></p>
-                    </div>
+                <div class="bg-red-50 p-6 rounded-2xl border border-red-100 shadow-sm text-red-600">
+                    <p class="text-sm font-bold">Sustainability Score</p>
+                    <p class="text-3xl font-bold">0/100</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                    <p class="text-sm font-medium text-slate-500">Carbon Intensity</p>
+                    <p class="text-3xl font-bold">0.0039</p>
                 </div>
             </div>
+        </div>
 
-            <div class="space-y-3">
-                <h3 class="text-lg font-bold flex items-center gap-2 px-2">
-                    <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
-                    Recommendations
-                </h3>
-                
-                <div class="bg-red-50 border border-red-100 p-4 rounded-2xl">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">High</span>
-                        <span class="text-xs font-bold text-red-700">Score: 82</span>
+        <div id="transactions" class="tab-content space-y-4">
+            <h2 class="text-xl font-bold">Recent Transactions</h2>
+            <div class="bg-white rounded-2xl border divide-y overflow-hidden">
+                <div class="p-6 flex justify-between items-center hover:bg-slate-50">
+                    <div class="flex gap-4">
+                        <i data-lucide="zap" class="text-yellow-500"></i>
+                        <div><p class="font-bold text-sm">City Electric Co.</p><p class="text-xs text-slate-400">Utilities</p></div>
                     </div>
-                    <h4 class="font-bold text-red-900 mb-1">Switch to Renewable Energy</h4>
-                    <p class="text-sm text-red-700/80 mb-2">Based on your utility spending, switching to a green provider could save 45kg CO₂e/mo.</p>
-                    <button class="text-sm font-bold text-red-900 flex items-center gap-1">Take Action <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
-                </div>
-
-                <div class="bg-yellow-50 border border-yellow-100 p-4 rounded-2xl">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="bg-yellow-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Medium</span>
-                        <span class="text-xs font-bold text-yellow-700">Score: 72</span>
-                    </div>
-                    <h4 class="font-bold text-yellow-900 mb-1">Optimize Commute</h4>
-                    <p class="text-sm text-yellow-700/80 mb-2">Public transport for 2 days a week would improve your score significantly.</p>
-                </div>
-
-                <div class="bg-blue-50 border border-blue-100 p-4 rounded-2xl">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Low</span>
-                        <span class="text-xs font-bold text-blue-700">Score: 66</span>
-                    </div>
-                    <h4 class="font-bold text-blue-900 mb-1">Sustainable Dining</h4>
-                    <p class="text-sm text-blue-700/80 mb-2">Opt for seasonal ingredients or plant-based options at your favorite merchants.</p>
+                    <div class="text-right font-bold"><p>$25.00</p><p class="text-green-600 text-xs">3.60 kg</p></div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <div id="insights" class="tab-content">
+            <div class="bg-gradient-to-br from-green-600 to-blue-600 p-8 rounded-3xl text-white">
+                <h2 class="text-2xl font-bold mb-4">Environmental Impact</h2>
+                <p class="text-sm opacity-90 mb-8">Your carbon footprint is 22% better than the national average.</p>
+                <button onclick="window.print()" class="no-print bg-white text-green-600 font-bold px-6 py-2 rounded-lg">Download Report</button>
+            </div>
+        </div>
     </main>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-6 py-3">
-        <div class="max-w-md mx-auto flex justify-between items-center">
-            <button class="flex flex-col items-center gap-1 text-green-600">
-                <i data-lucide="layout-grid" class="w-6 h-6"></i>
-                <span class="text-[10px] font-bold">Dashboard</span>
-            </button>
-            <button class="flex flex-col items-center gap-1 text-slate-400">
-                <i data-lucide="receipt-text" class="w-6 h-6"></i>
-                <span class="text-[10px] font-medium">Transactions</span>
-            </button>
-            <button class="flex flex-col items-center gap-1 text-slate-400">
-                <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
-                <span class="text-[10px] font-medium">Insights</span>
-            </button>
-            <button class="flex flex-col items-center gap-1 text-slate-400">
-                <i data-lucide="user" class="w-6 h-6"></i>
-                <span class="text-[10px] font-medium">Profile</span>
-            </button>
-        </div>
-    </nav>
-
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
+        function switchTab(id) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('bg-white', 'shadow', 'text-slate-900');
+                b.classList.add('text-slate-500');
+            });
+            event.target.classList.add('bg-white', 'shadow', 'text-slate-900');
+        }
     </script>
 </body>
 </html>

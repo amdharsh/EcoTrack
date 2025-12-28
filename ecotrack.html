@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack | Carbon Footprint Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-900 min-h-screen">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-600 p-2 rounded-lg text-white">
+                    <i data-lucide="leaf" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold leading-tight">EcoTrack</h1>
+                    <p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Carbon Footprint Tracker</p>
+                </div>
+            </div>
+
+            <nav class="flex bg-slate-100 p-1 rounded-xl">
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn px-4 py-1.5 text-sm font-medium rounded-lg transition-all bg-white shadow-sm text-slate-900">Dashboard</button>
+                <button onclick="switchTab('transactions')" id="btn-transactions" class="tab-btn px-4 py-1.5 text-sm font-medium rounded-lg transition-all text-slate-500 hover:text-slate-700">Transactions</button>
+                <button onclick="switchTab('insights')" id="btn-insights" class="tab-btn px-4 py-1.5 text-sm font-medium rounded-lg transition-all text-slate-500 hover:text-slate-700">Insights</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-8">
+        
+        <section id="dashboard" class="tab-content active space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <p class="text-sm font-medium text-slate-500">Total Emissions</p>
+                        <i data-lucide="trending-down" class="w-4 h-4 text-slate-400"></i>
+                    </div>
+                    <p class="text-3xl font-bold text-slate-900">204.26</p>
+                    <p class="text-xs text-slate-400 mt-1 font-medium">kg CO₂e this month</p>
+                </div>
+                <div class="bg-red-50 p-6 rounded-2xl border border-red-100 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <p class="text-sm font-medium text-red-600">Sustainability Score</p>
+                        <i data-lucide="award" class="w-4 h-4 text-red-400"></i>
+                    </div>
+                    <p class="text-3xl font-bold text-red-600">0/100</p>
+                    <p class="text-xs text-red-500 mt-1 font-medium">Needs improvement</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <p class="text-sm font-medium text-slate-500">Carbon Intensity</p>
+                        <i data-lucide="leaf" class="w-4 h-4 text-slate-400"></i>
+                    </div>
+                    <p class="text-3xl font-bold text-slate-900">0.0039</p>
+                    <p class="text-xs text-slate-400 mt-1 font-medium">kg CO₂e per USD</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-800">Recommendations</h3>
+                
+                <div class="bg-white border-l-4 border-red-500 p-5 rounded-xl shadow-sm flex items-center justify-between">
+                    <div class="flex gap-4">
+                        <div class="bg-red-50 p-3 rounded-lg text-red-500"><i data-lucide="zap" class="w-6 h-6"></i></div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-bold text-slate-900">Energy Efficiency Opportunity</h4>
+                                <span class="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded font-bold">HIGH</span>
+                            </div>
+                            <p class="text-sm text-slate-500">Your utility spending is high. Consider solar or renewable energy partners.</p>
+                            <p class="text-xs text-green-600 font-bold mt-1">Potential saving: 0.10 kg CO₂e</p>
+                        </div>
+                    </div>
+                    <p class="text-xs font-bold text-slate-400">Sustainability Score: 85/100</p>
+                </div>
+
+                <div class="bg-white border-l-4 border-yellow-500 p-5 rounded-xl shadow-sm flex items-center justify-between">
+                    <div class="flex gap-4">
+                        <div class="bg-yellow-50 p-3 rounded-lg text-yellow-500"><i data-lucide="leaf" class="w-6 h-6"></i></div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-bold text-slate-900">Carbon Offset Programs</h4>
+                                <span class="bg-yellow-100 text-yellow-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">Medium</span>
+                            </div>
+                            <p class="text-sm text-slate-500">Your carbon intensity is above average. Consider offset programs.</p>
+                            <p class="text-xs text-green-600 font-bold mt-1">Potential saving: 0.67 kg CO₂e</p>
+                        </div>
+                    </div>
+                    <p class="text-xs font-bold text-slate-400">Sustainability Score: 72/100</p>
+                </div>
+
+                <div class="bg-white border-l-4 border-blue-500 p-5 rounded-xl shadow-sm flex items-center justify-between">
+                    <div class="flex gap-4">
+                        <div class="bg-blue-50 p-3 rounded-lg text-blue-500"><i data-lucide="utensils" class="w-6 h-6"></i></div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-bold text-slate-900">Sustainable Dining Choices</h4>
+                                <span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">Low</span>
+                            </div>
+                            <p class="text-sm text-slate-500">Choose restaurants with local, plant-based menu options to reduce food emissions.</p>
+                            <p class="text-xs text-green-600 font-bold mt-1">Potential saving: 0.08 kg CO₂e</p>
+                        </div>
+                    </div>
+                    <p class="text-xs font-bold text-slate-400">Sustainability Score: 68/100</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                <h3 class="text-lg font-bold text-slate-800">Emissions by Category</h3>
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-bold"><span>Airlines</span><span>189.00 kg CO₂e</span></div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-green-500 h-full" style="width: 92%"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-bold"><span>Gas Station</span><span>6.72 kg CO₂e</span></div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-green-500 h-full" style="width: 15%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="transactions" class="tab-content space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-50">
+                    <h2 class="text-lg font-bold">Recent Transactions</h2>
+                    <p class="text-xs text-slate-500">View your carbon footprint by transaction</p>
+                </div>
+                <div class="divide-y divide-slate-50">
+                    <div class="p-4 flex items-center justify-between hover:bg-slate-50">
+                        <div class="flex items-center gap-4">
+                            <div class="text-yellow-500"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                            <div>
+                                <p class="text-sm font-bold">City Electric Co.</p>
+                                <p class="text-[10px] text-slate-400">Utilities • 2024-12-20</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-bold">$25.00</p>
+                            <p class="text-xs text-green-600 font-bold">3.60 kg CO₂e</p>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between hover:bg-slate-50">
+                        <div class="flex items-center gap-4">
+                            <div class="text-red-500"><i data-lucide="fuel" class="w-5 h-5"></i></div>
+                            <div>
+                                <p class="text-sm font-bold">Shell Gas Station</p>
+                                <p class="text-[10px] text-slate-400">Gas Station • 2024-12-18</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-bold">$12.00</p>
+                            <p class="text-xs text-green-600 font-bold">4.03 kg CO₂e</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="insights" class="tab-content space-y-8">
+            <div class="bg-gradient-to-br from-green-600 to-blue-600 rounded-3xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-2">Your Environmental Impact</h2>
+                <p class="text-sm opacity-90 mb-8">Based on your spending patterns, here's how you're doing</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md">
+                        <p class="text-xs font-semibold mb-1">Monthly Average</p>
+                        <p class="text-2xl font-bold">204.3</p>
+                        <p class="text-[10px]">kg CO₂e</p>
+                    </div>
+                    <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md">
+                        <p class="text-xs font-semibold mb-1">vs National Avg</p>
+                        <p class="text-2xl font-bold">-22%</p>
+                        <p class="text-[10px]">Better than average</p>
+                    </div>
+                    <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md">
+                        <p class="text-xs font-semibold mb-1">Trees to Offset</p>
+                        <p class="text-2xl font-bold">11</p>
+                        <p class="text-[10px]">trees per year</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <h3 class="text-lg font-bold mb-6">Achievement Badges</h3>
+                <div class="flex gap-6">
+                    <div class="text-center group">
+                        <div class="bg-green-50 w-24 h-24 rounded-2xl flex items-center justify-center mb-2 mx-auto border border-green-100">
+                            <i data-lucide="sprout" class="w-10 h-10 text-green-600"></i>
+                        </div>
+                        <p class="text-sm font-bold">Eco Starter</p>
+                        <p class="text-[10px] text-slate-400">Tracked 1 month</p>
+                    </div>
+                    <div class="text-center opacity-40">
+                        <div class="bg-slate-100 w-24 h-24 rounded-2xl flex items-center justify-center mb-2 mx-auto border border-slate-200">
+                            <i data-lucide="tree-pine" class="w-10 h-10 text-slate-400"></i>
+                        </div>
+                        <p class="text-sm font-bold">Green Champion</p>
+                        <p class="text-[10px] text-slate-400">Locked</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Show selected content
+            document.getElementById(tabId).classList.add('active');
+
+            // Update button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900');
+                btn.classList.add('text-slate-500');
+            });
+            document.getElementById('btn-' + tabId).classList.add('bg-white', 'shadow-sm', 'text-slate-900');
+            document.getElementById('btn-' + tabId).classList.remove('text-slate-500');
+        }
+    </script>
+</body>
+</html>
